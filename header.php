@@ -31,24 +31,8 @@ else {
 		<link rel="stylesheet" type="text/css" href="/selectize/css/selectize.default.css" />
 
 
-		<title><?php echo $pgtitle; ?>DnD Tools</title>
-		<?php
-		/*$handle = opendir(dirname(realpath(__FILE__)).'/assets/images/bg/');
-		while( $entry = readdir($handle) )
-		{
-		    if( $entry != '.' && $entry != '..' )
-		    {
-		        $files[] = $entry;
-		    }
-		}
-
-		closedir($handle);
-
-		sort($files);
-
-		  $i = rand(0, count($files)-1); // generate random number size of the array
-		  $selectedBg = "$files[$i]"; // set variable equal to which random filename was chosen
-	*/	?>
+		<title><?php echo $pgtitle; ?>GameRipple</title>
+		
 	</head>
 	<!--<body id="headbody" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(/assets/images/bg/<?php echo $selectedBg; ?>) no-repeat center center fixed;	-webkit-background-size: cover;	-moz-background-size: cover;	-o-background-size: cover;	background-size: cover;	opacity:0.9;"> -->
 	<body id="headbody" style="background-color: #2d2d2d; opacity: 0.8;">
@@ -91,162 +75,29 @@ else {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/index.php">DnD Tools</a>
+      <a class="navbar-brand" href="/index.php">GameRipple</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 				<li class="topsearch">
-					<select id="search">
-					<option value=""></option>
-					<?php
-					//if ($loguser == 'tarfuin') {
-					$searchdrop = "SELECT title FROM world WHERE worlduser LIKE '$loguser'";
-					$searchdata = mysqli_query($dbcon, $searchdrop) or die('error getting data');
-					while($searchrow =  mysqli_fetch_array($searchdata, MYSQLI_ASSOC)) {
-						$search = $searchrow['title'];
-						$searchvalue = $search.'1';
-						echo "<option value=\"$searchvalue\">$search</option>";
-					}
-				//}
-					?>
-					<?php
-					$searchdrop1 = "SELECT title FROM compendium";
-					$searchdata1 = mysqli_query($dbcon, $searchdrop1) or die('error getting data');
-					while($searchrow1 =  mysqli_fetch_array($searchdata1, MYSQLI_ASSOC)) {
-						$search1 = $searchrow1['title'];
-						$searchvalue1 = $search1.'2';
-						echo "<option value=\"$searchvalue1\">$search1</option>";
-					}
-					?>
-					<?php
-					$searchdrop2 = "SELECT title FROM srd";
-					$searchdata2 = mysqli_query($dbcon, $searchdrop2) or die('error getting data');
-					while($searchrow2 =  mysqli_fetch_array($searchdata2, MYSQLI_ASSOC)) {
-						$search2 = $searchrow2['title'];
-						$searchvalue2 = $search2.'3';
-						echo "<option value=\"$searchvalue2\">Rules: $search2</option>";
-					}
-					?>
-					</select>
+					
 				</li>
-				<?php // if ($loguser == 'tarfuin') { ?>
-				<li class="dropdown">
-				<a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">World(DM)<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li><a href="/tools/campaign-log/campaign-log.php">Campaign Log</a></li>
-<?php if ($loguser == 'tarfuin') { ?>
-					<li><a href="/tools/world/map-region.php">Region Map</a></li>
-					<li><a href="/tools/world/map.php">City Map</a></li>
-					<li><a href="https://app.fantasy-calendar.com/calendars/5752f966e0418bff07ba310d8817dd86" target="_BLANK">Calendar</a></li>
-					<li><a href="/tools/world/dbimport.php">Add to Compendium</a></li>
-					<?php  } ?>
-
-					<li><a href="/tools/world/import.php">Import</a></li>
-					<li><a href="/tools/world/gmnotes.php">GM Notes</a></li>
-					<li><a href="/tools/world/xp.php">Award XP</a></li>
-
-
-					<li role="separator" class="divider"></li>
-					<li><a href="/tools/world/all.php">All</a></li>
-					<li><a href="/tools/world/settlement.php">Settlements</a></li>
-					<li><a href="/tools/world/npc.php">NPCs</a></li>
-					<li><a href="/tools/world/pc.php">Player Characters</a></li>
-					<li><a href="/tools/world/faction.php">Factions</a></li>
-					<li><a href="/tools/world/deity.php">Deities</a></li>
-					<li><a href="/tools/world/quest.php">Quests</a></li>
-					<li><a href="/tools/world/establishment.php">Establishments</a></li>
-					<li><a href="/tools/world/publicquest.php">Public Quests</a></li>
-
-				</ul>
-				<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Compenium<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-						<li><a href="/tools/compendium/background.php">Backgrounds</a></li>
-						<li><a href="/tools/compendium/class.php">Classes</a></li>
-						<li><a href="/tools/compendium/feat.php">Feats</a></li>
-						<li><a href="/tools/compendium/item.php">Items</a></li>
-						<li><a href="/tools/compendium/monster.php">Monsters</a></li>
-						<li><a href="/tools/compendium/race.php">Races</a></li>
-						<li><a href="/tools/compendium/spell.php">Spells</a></li>
-						<li><a href="/tools/compendium/monster-all.php">Monsters(Lookup)</a></li>
-
-					</ul>
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/tools/world/workspace.php">Workspace</a></li>
-							<li><a href="/tools/initiative/initiative.php">Initiative</a></li>
-							<li><a href="/tools/generator/generator.php">Random Generator</a></li>
-							<li><a href="/tools/compendium/encounter-builder.php">Encounter Builder</a></li>
-
-							<li>
-<?php if ($loguser == 'tarfuin') {
-							echo ('<a href="/tools/resources/toc.php">Resources</a>');
-}
-	else {
-		echo ('<a href="/tools/resources/player-resources.php">Resources</a>');
-	}
-	?>
-							</li>
-							<li><a href="/tools/generator/spell-generator.php">Spell Generator</a></li>
-
-						</ul>
-
-						<li><a href="/tools/srd/srd.php">Rules/SRD</a></li>
+				
 						<?php
-						if ($friend == 1) { ?>
-			<!--	<li><a href="/tools/questboard/questboard.php">Quest Board</a></li> -->
-				<?php
-			}
-			?>
-				<!-- <li><a class="navbar-toggler" type="button" data-toggle="collapse" href="#" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">Music</a></li> -->
-				<?php
-				if ($loguser == 'null'){
-
-				echo ('<li><a href="/tools/users/login.php">Login</a></li>');
-			}
-			else {
-
+			if ($loguser == 'tarfuin'){
 			echo ('<li class="dropdown"><a href="#" class="dropdown-toggle" style="color: #42f486;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.ucfirst($loguser).'<span class="caret"></span></a>');
 			?>
 			<ul class="dropdown-menu">
-				<li><a href="/tools/users/characters.php">Characters</a></li>
-				<li><a href="/tools/users/notes.php">Notes</a></li>
-				<li><a href="/tools/users/bookmarks.php">Bookmarks</a></li>
 				<li><a href="/tools/users/logout.php">Logout</a></li>
 			</ul>
 			<?php
 			}
 			?>
-		<!--			<div class="collapse" id="navbarToggleExternalContent" style="margin-top:50px;">
-						<div class="row">
-
-						<iframe src="https://open.spotify.com/embed/user/1276319948/playlist/5htGO0OUB7SsFMT3kwjBn3" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-						<iframe src="https://open.spotify.com/embed/user/1276319948/playlist/60gbvdwgY25KcXsj0uc2qb" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-						<iframe src="https://open.spotify.com/embed/user/1276319948/playlist/0oYKtwS7RH8qmFNmUg1GPp" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-						<iframe src="https://open.spotify.com/embed/user/1276319948/playlist/0nWXBUnIWBTcGjnQ9f1Qqy" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-    </div>
-	</div> -->
-
-
   </div>
-
-
       </ul>
-
-
-
-    </div><!-- /.navbar-collapse -->
-
-				<!--<div class="col-md-2"><a href="/tools/world/import.php">Import</a></div>
-				<div class="col-md-2"><a href="/login.php">Signup/Login</a></div>-->
-					<!--<form method="post" id="searchdiv" action="/tools/world/world.php">-->
-
-				<!--</form>-->
-
+    </div>
 				<script type="text/javascript">
 				$('#search').selectize({
 				onChange: function(value){
