@@ -1,4 +1,1 @@
-This is Laetha's DM world tool.
-
-**Work in EXTREME Progress! :)**
-"# rpg-tools" 
+Laetha's Game Library project.
