@@ -112,18 +112,52 @@ else {
 	  </script>
     </div>
 				<script type="text/javascript">
+				var title;
 				$('#search').selectize({
-				onChange: function(value, resource, data, callbacks){
-					$('#test').html(value);
-			//sendRequest();
+    valueField: 'title',
+    labelField: 'title',
+    searchField: 'title',
+    options: [],
+    create: false,
+    render: {
+        option: function(item, escape) {
+			var baseURL = 'http://giantbomb.com/api';
+    		var apiKey = GBKey;
+    		var format = 'jsonp';            
 
-				},
-				create: false,
-				openOnFocus: false,
-				maxOpions: 4,
-				sortField: 'text',
-				placeholder: 'search...'
-				},);
+            return '<div>' +
+                /*'<img src="' + escape(item.image.medium_url) + '" alt="">' +*/
+                '<span class="title">' +
+                    '<span class="name">' + escape(item.aliases) + '</span>' +
+                '</span>' +
+                /*'<span class="description">' + escape(item.deck || 'No synopsis available at this time.') + '</span>' +*/
+                
+            '</div>';
+        }
+    },
+    load: function(query, callback) {
+        if (!query.length) return callback();
+        $.ajax({
+            url: 'http://www.giantbomb.com/api/games/?api_key=' + GBKey + '&format=jsonp&filter=name:'+ query,
+            type: 'GET',
+			jsonp: 'json_callback',
+            dataType: 'jsonp',
+            data: {
+                q: query,
+                page_limit: 10,
+                apikey: GBKey
+            },
+            error: function() {
+                callback();
+            },
+            success: function(res) {
+                callback(res.result);
+				$('#test').html(res.result);
+				
+            }
+        });
+    }
+});
 				</script>
 			</div><!-- /.container-fluid -->
 		</nav>
