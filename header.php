@@ -44,6 +44,7 @@ else {
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" tpye="text/javascript"></script>
 		<script src="/plugins/Do-Math-Within-Input-jQuery-Abacus\jquery.abacus.min.js"></script>
 		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+		<script type="text/javascript" src="/apikey.js"></script> 
 		<?php
 		//SQL Connect
 		 $sqlpath = $_SERVER['DOCUMENT_ROOT'];
@@ -82,7 +83,15 @@ else {
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 				<li class="topsearch">
+				<select id="search">
+					<option value=""></option>
+					<option id="opt1">1</option>
+					<option id="opt2">2</option>
+					<option id="opt3">3</option>
+					<option id="opt4">4</option>
+					<option id="opt5">5</option>
 					
+					</select>
 				</li>
 				
 						<?php
@@ -97,21 +106,17 @@ else {
 			?>
   </div>
       </ul>
+
+	  <script>
+
+	  </script>
     </div>
 				<script type="text/javascript">
 				$('#search').selectize({
-				onChange: function(value){
-					if(value.slice(-1) == 1) {
-					window.location.href = '/tools/world/world.php?id=' + value.slice(0, -1);
-				}
-				else if(value.slice(-1) == 2) {
+				onChange: function(value, resource, data, callbacks){
+					$('#test').html(value);
+			//sendRequest();
 
-					window.location.href = '/tools/compendium/compendium.php?id=' + value.slice(0, -1);
-				}
-				else {
-
-					window.location.href = '/tools/srd/rules.php?id=' + value.slice(0, -1);
-				}
 				},
 				create: false,
 				openOnFocus: false,
@@ -124,3 +129,4 @@ else {
 		</nav>
 
 		<div class="container-fluid">
+				<div id="test" class="sidebartext">AAAA</div>
