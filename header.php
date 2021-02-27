@@ -128,7 +128,7 @@ else {
             return '<div>' +
                 /*'<img src="' + escape(item.image.medium_url) + '" alt="">' +*/
                 '<span class="title">' +
-                    '<span class="name">' + escape(item.aliases) + '</span>' +
+                    '<span class="name">' + escape(item) + '</span>' +
                 '</span>' +
                 /*'<span class="description">' + escape(item.deck || 'No synopsis available at this time.') + '</span>' +*/
                 
@@ -145,14 +145,16 @@ else {
             data: {
                 q: query,
                 page_limit: 10,
-                apikey: GBKey
+                apikey: GBKey,
+				field_list: "name,guid"
             },
             error: function() {
                 callback();
             },
             success: function(res) {
-                callback(res.result);
-				$('#test').html(res.result);
+				var gameTitle = JSON.stringify(res.results);
+                //callback(res.results);
+				$('#test').html(gameTitle);
 				
             }
         });
