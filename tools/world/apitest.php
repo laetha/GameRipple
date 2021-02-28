@@ -37,9 +37,29 @@
   $stripid = stripslashes($stripid);
   $id = addslashes($id);
   ?>
-     <div class="pagetitle" id="pgtitle">API Test</div>
-     <div class="sidebartext col-md-8" id="test">aaa</div>
-     <div class="sidebartext col-md-4" style="text-align:center;" id="test2">bbb</div>
+     <div class="pagetitle" id="pgtitle"></div>
+     <div class="sidebartext col-md-8">
+       <span id="test"></span>
+     </div>
+     <div class="sidebartext col-md-4" style="text-align:right;">
+     <span style="width:100%;" id="test2"></span>
+     <table align="right">
+       <tr>
+         <td class="buttoncell">
+     <button class="btn btn-success">abc</button>
+</td>
+<td class="buttoncell">
+     <button class="btn btn-success">abc</button>
+</td>
+<td class="buttoncell">
+     <button class="btn btn-success">abc</button><br>
+</td>
+</tr>
+</table>
+     <div class="col-md-12"><div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+</div></div>
+    </div>
+     
 
      
 <script>
@@ -89,10 +109,10 @@ function sendRequest(resource, data, callbacks) {
                     jsonp: 'json_callback',
                     format: 'jsonp',
                     success: function(res) {
-                      gameTitle = JSON.stringify(res.results.name);
-                      gameAlias = JSON.stringify(res.results.aliases);
-                      gameDeck = JSON.stringify(res.results.deck);
-                      gameImage = JSON.stringify(res.results.image.medium_url);
+                      gameTitle = res.results.name;
+                      gameAlias = res.results.aliases;
+                      gameDeck = res.results.deck;
+                      gameImage = res.results.image.medium_url;
                         $('#pgtitle').html(gameTitle);
                         $('#test').html(gameDeck);
                         $('#test2').html('<img src=' + gameImage + ' height="300px" />');

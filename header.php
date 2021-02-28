@@ -85,11 +85,6 @@ else {
 				<li class="topsearch">
 				<select id="search">
 					<option value=""></option>
-					<option id="opt1">1</option>
-					<option id="opt2">2</option>
-					<option id="opt3">3</option>
-					<option id="opt4">4</option>
-					<option id="opt5">5</option>
 					
 					</select>
 				</li>
@@ -112,57 +107,65 @@ else {
 	  </script>
     </div>
 				<script type="text/javascript">
-				var title;
+			//	var title;
 				$('#search').selectize({
-    valueField: 'title',
-    labelField: 'title',
-    searchField: 'title',
+    valueField: 'guid',
+    labelField: 'name',
+    searchField: 'name',
+	maxOptions: 8,
     options: [],
     create: false,
     render: {
         option: function(item, escape) {
 			var baseURL = 'http://giantbomb.com/api';
     		var apiKey = GBKey;
-    		var format = 'jsonp';            
-
+			var releaseDate = escape(item.original_release_date);
+			var releaseDate1 = escape(item.expected_release_year);
+			var releaseYear = releaseDate.slice(0,4);
+			var comboRelease = releaseYear.concat(releaseDate1);
+			var finalRelease = comboRelease.replace('null','');
+			//var finalRelease = releaseYear;
+			
             return '<div>' +
-                /*'<img src="' + escape(item.image.medium_url) + '" alt="">' +*/
+                '<img src="' + escape(item.image.small_url) + '" alt="" height="100px" style="margin-right:20px;">' +
                 '<span class="title">' +
-                    '<span class="name">' + escape(item) + '</span>' +
-                '</span>' +
-                /*'<span class="description">' + escape(item.deck || 'No synopsis available at this time.') + '</span>' +*/
-                
+                    '<span class="name">' + escape(item.name) + ' - ('+
+					finalRelease+')</span>' +
+                '</span>' +                
             '</div>';
         }
     },
     load: function(query, callback) {
         if (!query.length) return callback();
         $.ajax({
-            url: 'http://www.giantbomb.com/api/games/?api_key=' + GBKey + '&format=jsonp&filter=name:'+ query,
+            url: 'http://www.giantbomb.com/api/games/?api_key=' + GBKey + '&format=jsonp&filter=name:'+ query + '&sort=original_release_date:desc',
             type: 'GET',
 			jsonp: 'json_callback',
+			format: 'jsonp',
             dataType: 'jsonp',
             data: {
                 q: query,
                 page_limit: 10,
-                apikey: GBKey,
-				field_list: "name,guid"
+                apikey: GBKey/*,
+				field_list: "name,guid,image.small_url"*/
             },
             error: function() {
                 callback();
             },
             success: function(res) {
-				var gameTitle = JSON.stringify(res.results);
-                //callback(res.results);
-				$('#test').html(gameTitle);
-				
+                callback(res.results);
             }
         });
-    }
+    },
+	onChange: function(value){
+					
+					window.location.href = '/tools/world/apitest.php?id=' + value;
+	}
+	
+
 });
 				</script>
 			</div><!-- /.container-fluid -->
 		</nav>
 
 		<div class="container-fluid">
-				<div id="test" class="sidebartext">AAAA</div>
