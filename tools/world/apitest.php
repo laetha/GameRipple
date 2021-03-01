@@ -36,6 +36,7 @@
   $stripid = str_replace("'", "", $id);
   $stripid = stripslashes($stripid);
   $id = addslashes($id);
+
   ?>
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
@@ -63,17 +64,45 @@
      <table align="right">
        <tr>
          <td class="buttoncell">
-     <button class="btn btn-success">Add</button>
+         <?php
+            $sqlcompendium = "SELECT * FROM games WHERE guid LIKE '$id' AND active=1";
+            $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
+            if (mysqli_num_rows($compendiumdata)==0) { 
+              echo '<button class="btn btn-success" id="addGame" onClick="addGame()">Add</button>';
+              echo '<button class="btn btn-danger nonav" id="removeGame" onClick="removeGame()">Remove</button>';
+            }
+            else {
+              echo '<button class="btn btn-success nonav" id="addGame" onClick="addGame()">Add</button>';
+              echo '<button class="btn btn-danger" id="removeGame" onClick="removeGame()">Remove</button>';
+            }
+         ?>
+     
 </td>
 <td class="buttoncell">
 <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" id="gameStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Status
+    <?php
+  $sqlcompendium = "SELECT status FROM games WHERE guid LIKE '$id'";
+               $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
+               if (mysqli_num_rows($compendiumdata)==0) {
+                echo 'Status';
+               }
+               else {
+                while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
+                  if ($row['status'] == ''){
+                    echo 'Status';
+                  }
+                  else {
+                    echo $row['status'];
+                  }
+                }  
+               }
+    ?>
   </button>
   <ul class="dropdown-menu">
-    <li class="dropbutton">Action</li>
-    <li class="dropbutton">Another action</li>
-    <li class="dropbutton">Something else here</li>
+    <li class="dropbutton" id="Unplayed" onClick="statusChange('Unplayed')">Unplayed</li>
+    <li class="dropbutton" id="Played" onClick="statusChange('Played')">Played</li>
+    <li class="dropbutton" id="Finished" onClick="statusChange('Finished')">Finished</li>
   </div>
 </div>
 <!--     <button class="btn btn-primary">Status</button> -->
@@ -161,8 +190,74 @@ $(document).ready(function(){
     // No custom callbacks defined here, just use the default onces.
     sendRequest(resource, data);
 
-
 });
+
+function addGame(){
+
+  var gameID = '<?php echo $id; ?>';
+  var gameTitle = $('#pgtitle').html();
+
+  $.ajax({
+    url : 'addgame.php',
+    type: 'GET',
+    data : { "title" : gameTitle, "guid" : gameID },
+    success: function()
+    {
+        //if success then just output the text to the status div then clear the form inputs to prepare for new data
+        $("#addGame").addClass('nonav');
+        $("#removeGame").removeClass('nonav');
+    },
+    error: function (jqXHR, status, errorThrown)
+    {
+        //if fail show error and server status
+        $("#status_text").html('there was an error ' + errorThrown + ' with status ' + textStatus);
+    }
+});
+}
+
+function removeGame(){
+
+var gameID = '<?php echo $id; ?>';
+
+$.ajax({
+  url : 'removegame.php',
+  type: 'GET',
+  data : { "guid" : gameID },
+  success: function()
+  {
+      //if success then just output the text to the status div then clear the form inputs to prepare for new data
+      $("#addGame").removeClass('nonav');
+      $("#removeGame").addClass('nonav');
+  },
+  error: function (jqXHR, status, errorThrown)
+  {
+      //if fail show error and server status
+      $("#status_text").html('there was an error ' + errorThrown + ' with status ' + textStatus);
+  }
+});
+}
+
+function statusChange(value){
+  var gameID = '<?php echo $id; ?>';
+  var gameStatus = value;
+
+  $.ajax({
+  url : 'changestatus.php',
+  type: 'GET',
+  data : { "guid" : gameID, "status" : gameStatus },
+  success: function()
+  {
+      //if success then just output the text to the status div then clear the form inputs to prepare for new data
+      $('#gameStatus').html(value);
+  },
+  error: function (jqXHR, status, errorThrown)
+  {
+      //if fail show error and server status
+      $("#status_text").html('there was an error ' + errorThrown + ' with status ' + textStatus);
+  }
+});
+}
+
 </script>
 </div>
    <?php
