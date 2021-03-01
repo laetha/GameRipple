@@ -1225,3 +1225,29 @@ code {
 .buttoncell {
 	padding:8px;
 }
+
+.iframe-container{
+	position: relative;
+	width: 100%;
+	padding-bottom: 10.25%;
+	height: 0;
+  }
+  .iframe-container iframe{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 400px;
+  }
+  
+  .dropdown-item {
+	  color:black;
+  }
+
+  .dropbutton {
+	  color:#212121;
+  }
+
+  .dropbutton:hover {
+	  background-color:rgba(148, 160, 206, 0.5);
+  }

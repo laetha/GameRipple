@@ -40,19 +40,46 @@
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
        <span id="test"></span>
+       <p>
+       <ul class="nav nav-tabs">
+        <li><a data-toggle="tab" href="#videotab">Video</a></li>
+        <li><a data-toggle="tab" href="#gallerytab">Gallery</a></li>
+        <li><a data-toggle="tab" href="#reviewtab">Review</a></li>
+       </ul>
+       <div class="tab-content">
+       <div class=" tab-pane fade" id="videotab">
+       VIDEO
+       </div>
+       <div class=" tab-pane fade" id="gallerytab">
+       GALLERY
+       </div>
+       <div class=" tab-pane fade" id="reviewtab">
+       REVIEW
+       </div>
+       </div>
      </div>
      <div class="sidebartext col-md-4" style="text-align:right;">
      <span style="width:100%;" id="test2"></span>
      <table align="right">
        <tr>
          <td class="buttoncell">
-     <button class="btn btn-success">abc</button>
+     <button class="btn btn-success">Add</button>
 </td>
 <td class="buttoncell">
-     <button class="btn btn-success">abc</button>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="gameStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Status
+  </button>
+  <ul class="dropdown-menu">
+    <li class="dropbutton">Action</li>
+    <li class="dropbutton">Another action</li>
+    <li class="dropbutton">Something else here</li>
+  </div>
+</div>
+<!--     <button class="btn btn-primary">Status</button> -->
 </td>
 <td class="buttoncell">
-     <button class="btn btn-success">abc</button><br>
+     <button class="btn btn-info">Edit</button><br>
 </td>
 </tr>
 </table>
