@@ -37,6 +37,12 @@
   $stripid = stripslashes($stripid);
   $id = addslashes($id);
 
+  $sqlcompendium = "SELECT rating FROM games WHERE guid LIKE '$id'";
+  $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
+  while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
+    $rating = $row['rating'];
+  }
+
   ?>
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
@@ -108,11 +114,11 @@
 <!--     <button class="btn btn-primary">Status</button> -->
 </td>
 <td class="buttoncell">
-     <button class="btn btn-info">Edit</button><br>
+     <a href="gameedit.php?id=<?php echo $id; ?>"><button class="btn btn-info">Edit</button></a><br>
 </td>
 </tr>
 </table>
-     <div class="col-md-12"><div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+     <div class="col-md-12 disabled" id="starRatings"><div class="rating"><input type="radio" name="rating" value="5" id="5" onClick="rateGame('5')"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4" onClick="rateGame('4')"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3" onClick="rateGame('3')"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2" onClick="rateGame('2')"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1" onClick="rateGame('1')">☆</label>
 </div></div>
     </div>
      
@@ -189,6 +195,8 @@ $(document).ready(function(){
 
     // No custom callbacks defined here, just use the default onces.
     sendRequest(resource, data);
+    var currentRating = '#<?php echo $rating; ?>';
+    $(currentRating).prop("checked", true);
 
 });
 
@@ -206,6 +214,7 @@ function addGame(){
         //if success then just output the text to the status div then clear the form inputs to prepare for new data
         $("#addGame").addClass('nonav');
         $("#removeGame").removeClass('nonav');
+        $('#starRatings').removeClass('nonav');
     },
     error: function (jqXHR, status, errorThrown)
     {
@@ -228,6 +237,7 @@ $.ajax({
       //if success then just output the text to the status div then clear the form inputs to prepare for new data
       $("#addGame").removeClass('nonav');
       $("#removeGame").addClass('nonav');
+      $('#starRatings').addClass('nonav');
   },
   error: function (jqXHR, status, errorThrown)
   {
@@ -249,6 +259,26 @@ function statusChange(value){
   {
       //if success then just output the text to the status div then clear the form inputs to prepare for new data
       $('#gameStatus').html(value);
+  },
+  error: function (jqXHR, status, errorThrown)
+  {
+      //if fail show error and server status
+      $("#status_text").html('there was an error ' + errorThrown + ' with status ' + textStatus);
+  }
+});
+}
+
+function rateGame(value){
+  var gameRating = value;
+  var gameID = '<?php echo $id; ?>';
+  $.ajax({
+  url : 'rategame.php',
+  type: 'GET',
+  data : { "guid" : gameID, "rating" : gameRating },
+  success: function()
+  {
+      //if success then just output the text to the status div then clear the form inputs to prepare for new data
+      //$('#gameStatus').html(value);
   },
   error: function (jqXHR, status, errorThrown)
   {
