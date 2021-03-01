@@ -27,6 +27,10 @@
    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
    <script type="text/javascript" src="/apikey.js"></script> 
+    <!-- nanogallery2 -->
+    <link  href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+            <script  type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
+
 
    <div class="mainbox col-lg-10 col-xs-12 col-lg-offset-1">
 
@@ -37,12 +41,21 @@
   $stripid = stripslashes($stripid);
   $id = addslashes($id);
 
-  $sqlcompendium = "SELECT rating FROM games WHERE guid LIKE '$id'";
+  $sqlcompendium = "SELECT * FROM games WHERE guid LIKE '$id'";
   $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
+  if (mysqli_num_rows($compendiumdata)==0) { ?>
+    <div class="pagetitle" id="pgtitle"></div>
+    <div class="sidebartext col-md-8">
+      <span id="test"></span>
+      <p>
+  <?php }
+  else {
   while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
     $rating = $row['rating'];
-  }
+    $gallery = $row['gallery'];
+    $playlist = $row['playlist'];
 
+  }
   ?>
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
@@ -53,18 +66,61 @@
         <li><a data-toggle="tab" href="#gallerytab">Gallery</a></li>
         <li><a data-toggle="tab" href="#reviewtab">Review</a></li>
        </ul>
+       
        <div class="tab-content">
        <div class=" tab-pane fade" id="videotab">
-       VIDEO
+         <?php
+          if (isset($playlist) && $playlist !== ''){
+            $PL1 = 'https://www.youtube.com/embed/videoseries?list=';
+            $PL2 = $playlist;
+            echo ('<iframe width="560" height="315" src="'.$PL1.$PL2.'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+          }
+         ?>
        </div>
        <div class=" tab-pane fade" id="gallerytab">
-       GALLERY
+       <?php
+        
+        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
+        $files = scandir($path);
+        
+       ?>
+<!-- ### position of the gallery ### -->
+<div id="nanogallery2">gallery_made_with_nanogallery2</div>
+
+<script>
+   jQuery(document).ready(function () {
+
+      jQuery("#nanogallery2").nanogallery2( {
+          // ### gallery settings ### 
+          thumbnailHeight:  180,
+          thumbnailWidth:   320,
+          itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
+          
+          // ### gallery content ### 
+          items: [
+            <?php
+              foreach ($files as $img){
+                if (strpos($img,'.png') !== false || strpos($img,'.png') !== false || strpos($img,'.png') !== false){
+                echo ("{ src: '".$img."' },");
+                }
+              }
+
+            ?>
+/* { src: 'Sekiro Screenshot 2019.03.24 - 18.34.09.02.png' },
+              { src: 'Sekiro Screenshot 2019.03.24 - 19.02.14.41.png' },
+              { src: 'Sekiro Screenshot 2019.03.24 - 19.22.50.52.png' }*/
+            ]
+        });
+    });
+</script>
        </div>
        <div class=" tab-pane fade" id="reviewtab">
        REVIEW
        </div>
        </div>
+       <?php } ?>
      </div>
+
      <div class="sidebartext col-md-4" style="text-align:right;">
      <span style="width:100%;" id="test2"></span>
      <table align="right">
@@ -195,8 +251,15 @@ $(document).ready(function(){
 
     // No custom callbacks defined here, just use the default onces.
     sendRequest(resource, data);
-    var currentRating = '#<?php echo $rating; ?>';
+    <?php
+    if (isset($rating)){
+      ?>
+      var currentRating = '#<?php echo $rating; ?>';
     $(currentRating).prop("checked", true);
+    <?php
+    }
+    ?>
+    
 
 });
 
