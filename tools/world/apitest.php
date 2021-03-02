@@ -21,6 +21,8 @@
     <?php  $Parsedown = new Parsedown();
     ?>
    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
+   <link  href="/plugins/nanogallery2/src/css/nanogallery2.css" rel="stylesheet" type="text/css">
+            <script  type="text/javascript" src="/plugins/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js" type="text/javascript"></script>
    <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js" type="text/javascript"></script>
@@ -28,8 +30,6 @@
    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
    <script type="text/javascript" src="/apikey.js"></script> 
     <!-- nanogallery2 -->
-    <link  href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
-            <script  type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
 
 
    <div class="mainbox col-lg-10 col-xs-12 col-lg-offset-1">
@@ -40,7 +40,7 @@
   $stripid = str_replace("'", "", $id);
   $stripid = stripslashes($stripid);
   $id = addslashes($id);
-
+ 
   $sqlcompendium = "SELECT * FROM games WHERE guid LIKE '$id'";
   $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
   if (mysqli_num_rows($compendiumdata)==0) { ?>
@@ -56,45 +56,51 @@
     $playlist = $row['playlist'];
 
   }
+        
+        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
+        $files = scandir($path);
+        
+
   ?>
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
        <span id="test"></span>
        <p>
-       <ul class="nav nav-tabs">
-        <li><a data-toggle="tab" href="#videotab">Video</a></li>
-        <li><a data-toggle="tab" href="#gallerytab">Gallery</a></li>
-        <li><a data-toggle="tab" href="#reviewtab">Review</a></li>
-       </ul>
        
        <div class="tab-content">
-       <div class=" tab-pane fade" id="videotab">
+       <div id="videotab">
          <?php
           if (isset($playlist) && $playlist !== ''){
             $PL1 = 'https://www.youtube.com/embed/videoseries?list=';
             $PL2 = $playlist;
-            echo ('<iframe width="560" height="315" src="'.$PL1.$PL2.'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+            echo ('<div class="col-centered"><iframe width="560" height="315" src="'.$PL1.$PL2.'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>'); 
           }
+
+          
          ?>
        </div>
-       <div class=" tab-pane fade" id="gallerytab">
        <?php
-        
-        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
-        $files = scandir($path);
-        
-       ?>
+       if (isset($gallery) && $gallery !== ''){
+       
+            echo ('<div id="gallerytab">');
+          }
+          else {
+            echo ('<div class="nonav" id="gallerytab">');
+          }
+          ?>
+       
 <!-- ### position of the gallery ### -->
-<div id="nanogallery2">gallery_made_with_nanogallery2</div>
+<div id="nanogallery2"></div>
 
 <script>
    jQuery(document).ready(function () {
-
-      jQuery("#nanogallery2").nanogallery2( {
+        jQuery("#nanogallery2").nanogallery2( {
           // ### gallery settings ### 
           thumbnailHeight:  180,
           thumbnailWidth:   320,
           itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
+          galleryDisplayMode: 'pagination',
+          galleryMaxRows: 3,
           
           // ### gallery content ### 
           items: [
@@ -114,7 +120,15 @@
     });
 </script>
        </div>
-       <div class=" tab-pane fade" id="reviewtab">
+       <?php
+       if (isset($review) && $review !== ''){
+       
+            echo ('<div id="reviewtab">');
+          }
+          else {
+            echo ('<div class="nonav" id="reviewtab">');
+          }
+          ?>
        REVIEW
        </div>
        </div>
@@ -260,7 +274,6 @@ $(document).ready(function(){
     }
     ?>
     
-
 });
 
 function addGame(){
