@@ -418,7 +418,17 @@ display:none;
 
        </div>
 
-           <div class="text col-centered col-md-12"><textarea type="text" name="body" id="body"><?php echo $editrow['body']; ?></textarea></div>
+           <div class="text col-centered col-md-12"><textarea type="text" name="body" id="body">
+           
+           <?php 
+           if ($editrow['body'] === ''){
+            echo ('yo');
+           }
+           else {
+            echo $editrow['body']; 
+           }
+           ?>
+           </textarea></div>
            <div class="col-centered">
              <?php
               $jpgurl = 'uploads/'.$id.'.jpg';

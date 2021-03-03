@@ -44,6 +44,8 @@ else {
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" tpye="text/javascript"></script>
 		<script src="/plugins/Do-Math-Within-Input-jQuery-Abacus\jquery.abacus.min.js"></script>
 		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 		<script type="text/javascript" src="/apikey.js"></script> 
 		<?php
 		//SQL Connect

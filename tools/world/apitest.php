@@ -55,6 +55,8 @@
     $rating = $row['rating'];
     $gallery = $row['gallery'];
     $playlist = $row['playlist'];
+    $review = $row['review'];
+
 
   }
         
@@ -124,13 +126,12 @@
        <?php
        if (isset($review) && $review !== ''){
        
-            echo ('<div id="reviewtab">');
+            echo ('<p><div id="reviewtab">'.$Parsedown->text($review));
           }
           else {
             echo ('<div class="nonav" id="reviewtab">');
           }
           ?>
-       REVIEW
        </div>
        </div>
        <?php } ?>
