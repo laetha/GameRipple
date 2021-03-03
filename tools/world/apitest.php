@@ -45,6 +45,7 @@
   $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
   if (mysqli_num_rows($compendiumdata)==0) { ?>
     <div class="pagetitle" id="pgtitle"></div>
+    <div class="nonav" id="gameImage"></div>
     <div class="sidebartext col-md-8">
       <span id="test"></span>
       <p>
@@ -248,6 +249,7 @@ function sendRequest(resource, data, callbacks) {
                         $('#pgtitle').html(gameTitle);
                         $('#test').html(gameDeck);
                         $('#test2').html('<img src=' + gameImage + ' height="300px" />');
+                        $('#gameImage').html(gameImage);
 
                     }
                 });
@@ -280,11 +282,12 @@ function addGame(){
 
   var gameID = '<?php echo $id; ?>';
   var gameTitle = $('#pgtitle').html();
+  var gameImage = $('#gameImage').html(); 
 
   $.ajax({
     url : 'addgame.php',
     type: 'GET',
-    data : { "title" : gameTitle, "guid" : gameID },
+    data : { "title" : gameTitle, "guid" : gameID, "gameImage" : gameImage },
     success: function()
     {
         //if success then just output the text to the status div then clear the form inputs to prepare for new data

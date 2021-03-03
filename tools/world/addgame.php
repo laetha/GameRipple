@@ -5,12 +5,14 @@ include_once($sqlpath);
 
 $title =$_REQUEST['title'];
 $guid = $_REQUEST['guid'];
+$imgurl = $_REQUEST['gameImage'];
+
 
 $sqlcompendium = "SELECT * FROM games WHERE guid LIKE '$guid'";
             $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
             if (mysqli_num_rows($compendiumdata)==0) { 
-$sql = "INSERT INTO games(title,guid,active)
-				VALUES('$title','$guid',1)";
+$sql = "INSERT INTO games(title,guid,active,imgurl)
+				VALUES('$title','$guid',1,'$imgurl')";
 
         if ($dbcon->query($sql) === TRUE) {
 					

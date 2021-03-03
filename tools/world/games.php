@@ -32,8 +32,6 @@
                <tr>
                    <th scope="col">Title</th>
 
-                   <th scope="col">Image</th>
-
                    <th scope="col">Status</th>
 
                    <th scope="col">Rating</th>
@@ -49,8 +47,6 @@
            <tfoot>
              <tr>
              <th scope="col">Title</th>
-
-             <th scope="col">Image</th>
 
               <th scope="col">Status</th>
 
@@ -71,14 +67,14 @@
                while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
                //echo ('<tr><td>');
                $title = $row['title'];
+               $imgurl = $row['imgurl'];
                $status = $row['status'];
                $rating = $row['rating'];
                $gallery = $row['gallery'];
                $review = $row['review'];
                $playlist = $row['playlist'];
                $guid = $row['guid'];
-               echo ('<td><a href="apitest.php?id='.$guid.'">'.$title.'</td></a>');
-               echo ('<td>IMAGE</td>');
+               echo ('<td><a href="apitest.php?id='.$guid.'"><img src="'.$imgurl.'" height="200px" /><br>'.$title.'</a></td>');
                echo "<td>".$status."</td>";
                echo "<td>".$rating."</td>";
                if ($gallery !== ''){
