@@ -51,6 +51,8 @@ if (!empty($_GET['id'])) {
              <input type="hidden" name="guid" id="guid" value="<?php echo $guid; ?>">
              <div class="text">Gallery Folder</div><input class="textbox" style="text-align:center;" type="text" name="gallery" id="gallery" value="<?php echo $gallery; ?>"><p>
              <div class="text">Playlist URL</div><input class="textbox" style="text-align:center;" type="text" name="playlist" id="playlist" value="<?php echo $playlist; ?>">
+             </div>
+             <dic class="col-sm-10 col-centered typebox">
              <div class="text col-centered col-md-12">Review<textarea type="text" name="review" id="review"><?php 
              if ($review == ''){
                echo ('aaaa');
@@ -59,7 +61,7 @@ if (!empty($_GET['id'])) {
               echo $review;
              }
              ?>
-             </textarea></div>
+             </textarea></div></div>
         
              <div class="sidebartext col-centered"><input type="checkbox" name="reviewBox" id="reviewBox" value="yes" onclick="showReview()">Review?</div>
        </div>
@@ -89,6 +91,26 @@ if (!empty($_GET['id'])) {
     $('#reviewShow').html(marked(reviewText));
   }
   </script>
+
+<style>
+.editor-toolbar{
+  background-color: white;
+}
+</style>
+
+<script>
+var simplemde = new SimpleMDE({ element: document.getElementById("review") });
+
+$(document).ready(function(){
+
+  $(".fa-question-circle").after('<i class="separator">|</i><a title="Image from Gallery" tabindex="-1" class="fa fa-picture-o" onclick="addimg()"></a>');
+  
+});
+
+function addimg(){
+  
+}
+</script>
 
          <?php
        }

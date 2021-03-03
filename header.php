@@ -45,6 +45,8 @@ else {
 		<script src="/plugins/Do-Math-Within-Input-jQuery-Abacus\jquery.abacus.min.js"></script>
 		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+		<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 		<script type="text/javascript" src="/apikey.js"></script> 
 		<?php
@@ -167,6 +169,7 @@ else {
 
 });
 				</script>
+
 			</div><!-- /.container-fluid -->
 		</nav>
 
