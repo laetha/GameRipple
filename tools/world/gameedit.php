@@ -42,6 +42,10 @@ if (!empty($_GET['id'])) {
          $gallery = $editrow['gallery'];
          $playlist = $editrow['playlist'];
          $review = $editrow['review'];
+
+          
+        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
+        $files = scandir($path);
 ?>
 
         <div class="col-md-10 col-centered">
@@ -53,9 +57,41 @@ if (!empty($_GET['id'])) {
              <div class="text">Playlist URL</div><input class="textbox" style="text-align:center;" type="text" name="playlist" id="playlist" value="<?php echo $playlist; ?>">
              </div>
              <dic class="col-sm-10 col-centered typebox">
+             <div class="nonav" id="nanogallery2"></div>
+             <script>
+   jQuery(document).ready(function () {
+        jQuery("#nanogallery2").nanogallery2( {
+          // ### gallery settings ### 
+          thumbnailHeight:  180,
+          thumbnailWidth:   320,
+          itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
+          galleryDisplayMode: 'pagination',
+          galleryMaxRows: 3,
+          
+          // ### gallery content ### 
+          items: [
+            <?php
+              foreach ($files as $img){
+                if (strpos($img,'.png') !== false || strpos($img,'.png') !== false || strpos($img,'.png') !== false){
+                echo ("{ src: '".$img."' },");
+                }
+              }
+
+            ?>
+            ]
+        });
+    });
+
+    function addimg(){
+   
+   $('#nanogallery2').removeClass('nonav');
+  // $('#nanogallery2').nanoGallery2('refreshSize');
+ 
+ }
+</script>
              <div class="text col-centered col-md-12">Review<textarea type="text" name="review" id="review"><?php 
              if ($review == ''){
-               echo ('aaaa');
+               
              }
              else {
               echo $review;
@@ -107,9 +143,6 @@ $(document).ready(function(){
   
 });
 
-function addimg(){
-  
-}
 </script>
 
          <?php

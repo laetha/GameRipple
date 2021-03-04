@@ -21,8 +21,6 @@
     <?php  $Parsedown = new Parsedown();
     ?>
    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
-   <link  href="/plugins/nanogallery2/src/css/nanogallery2.css" rel="stylesheet" type="text/css">
-            <script  type="text/javascript" src="/plugins/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js" type="text/javascript"></script>
    <script src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js" type="text/javascript"></script>

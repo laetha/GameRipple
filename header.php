@@ -47,6 +47,8 @@ else {
 		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 		<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+		<link  href="/plugins/nanogallery2/src/css/nanogallery2.css" rel="stylesheet" type="text/css">
+            <script  type="text/javascript" src="/plugins/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
 
 		<script type="text/javascript" src="/apikey.js"></script> 
 		<?php
