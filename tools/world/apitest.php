@@ -123,7 +123,7 @@
        </div>
        <?php
        if (isset($review) && $review !== ''){
-       
+  
             echo ('<p><div id="reviewtab">'.$Parsedown->text($review));
           }
           else {
@@ -274,7 +274,7 @@ $(document).ready(function(){
     <?php
     }
     ?>
-    
+    $("em").css("text-align","center");
 });
 
 function addGame(){
@@ -363,11 +363,18 @@ function rateGame(value){
       //if fail show error and server status
       $("#status_text").html('there was an error ' + errorThrown + ' with status ' + textStatus);
   }
+
 });
 }
 
 </script>
 </div>
+<style>
+  p img {
+    max-width:100%;
+  }
+
+</style>
    <?php
    //Footer
    $footpath = $_SERVER['DOCUMENT_ROOT'];
