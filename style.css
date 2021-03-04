@@ -1251,3 +1251,11 @@ code {
   .dropbutton:hover {
 	  background-color:rgba(148, 160, 206, 0.5);
   }
+
+  .caption {
+	  margin-top: -30px;
+	  text-align:center;
+	  font-weight: bold;	  
+	  font-size:14px;
+  }
+  

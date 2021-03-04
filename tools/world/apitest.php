@@ -113,9 +113,6 @@
               }
 
             ?>
-/* { src: 'Sekiro Screenshot 2019.03.24 - 18.34.09.02.png' },
-              { src: 'Sekiro Screenshot 2019.03.24 - 19.02.14.41.png' },
-              { src: 'Sekiro Screenshot 2019.03.24 - 19.22.50.52.png' }*/
             ]
         });
     });
@@ -123,8 +120,8 @@
        </div>
        <?php
        if (isset($review) && $review !== ''){
-  
-            echo ('<p><div id="reviewtab">'.$Parsedown->text($review));
+
+            echo ('<p><div style="text-align:left;" id="reviewtab">'.$Parsedown->text($review));
           }
           else {
             echo ('<div class="nonav" id="reviewtab">');
@@ -254,7 +251,12 @@ function sendRequest(resource, data, callbacks) {
                 });
 }
 $(document).ready(function(){
-  
+  var currentReview = $('#reviewtab').html();
+
+    var newReview  = currentReview.replace(/<em>/g, '<div class="caption"><em>');
+    newReview  = newReview.replace(/<\/em>/g, '<\/div><\/em>');
+    $('#reviewtab').html(newReview);
+
  // get game id from somewhere like a link.
  var gameID = '<?php echo $id; ?>';
     var resource = '/game/' + gameID;
@@ -274,7 +276,10 @@ $(document).ready(function(){
     <?php
     }
     ?>
-    $("em").css("text-align","center");
+    
+    //$("em").css("text-align","center");
+    //$("em").addClass("caption");
+
 });
 
 function addGame(){
@@ -372,6 +377,7 @@ function rateGame(value){
 <style>
   p img {
     max-width:100%;
+    border-bottom: 22px solid black;
   }
 
 </style>
