@@ -50,6 +50,7 @@
   <?php }
   else {
   while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
+    $title = $row['title'];
     $rating = $row['rating'];
     $gallery = $row['gallery'];
     $playlist = $row['playlist'];
@@ -57,17 +58,26 @@
 
 
   }
-        
+  if (isset($gallery) && $gallery !== ''){
+
         $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
         $files = scandir($path);
-        
+  }
+  else {
+    if (is_dir($_SERVER['DOCUMENT_ROOT'].'/gallery/'.$title) == true){
+      $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$title.'/';
+        $files = scandir($path);
+        $gallery = $title;
+    }
+    
+  }        
 
   ?>
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
        <span id="gamedeck"></span>
        <p>
-       <?php if ($gallery == '' && $review == '' && $playlist == ''){
+       <?php if ($gallery == '' && isset($files) == false && $review == '' && $playlist == ''){
 
        }
        else {
@@ -75,7 +85,7 @@
        if (isset($playlist) && $playlist !== ''){
        echo ('<li><a data-toggle="tab" href="#videotab">Video</a></li>');
        }
-       if (isset($gallery) && $gallery !== ''){
+       if (isset($files)){
         echo ('<li><a data-toggle="tab" href="#gallerytab" onclick="showGallery()">Gallery</a></li>');
         }
         if (isset($review) && $review !== ''){
@@ -131,6 +141,7 @@
             ?>
             ]
         });
+        updateGallery();
     });
 </script>
        </div>
@@ -157,6 +168,7 @@
             $sqlcompendium = "SELECT * FROM games WHERE guid LIKE '$id' AND active=1";
             $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
             if (mysqli_num_rows($compendiumdata)==0) { 
+              $gallery = '';
               echo '<button class="btn btn-success" id="addGame" onClick="addGame()">Add</button>';
               echo '<button class="btn btn-danger nonav" id="removeGame" onClick="removeGame()">Remove</button>';
             }
@@ -310,11 +322,12 @@ function addGame(){
   var gameID = '<?php echo $id; ?>';
   var gameTitle = $('#pgtitle').html();
   var gameImage = $('#gameImage').html(); 
+  var gameGallery = '<?php echo $gallery; ?>';
 
   $.ajax({
     url : 'addgame.php',
     type: 'GET',
-    data : { "title" : gameTitle, "guid" : gameID, "gameImage" : gameImage },
+    data : { "title" : gameTitle, "guid" : gameID, "gameImage" : gameImage, "gallery" : gameGallery },
     success: function()
     {
         //if success then just output the text to the status div then clear the form inputs to prepare for new data
@@ -344,6 +357,26 @@ $.ajax({
       $("#addGame").removeClass('nonav');
       $("#removeGame").addClass('nonav');
       $('#starRatings').addClass('nonav');
+  },
+  error: function (jqXHR, status, errorThrown)
+  {
+      //if fail show error and server status
+      $("#status_text").html('there was an error ' + errorThrown + ' with status ' + textStatus);
+  }
+});
+}
+
+function updateGallery(){
+  var gameID = '<?php echo $id; ?>';
+  var gameGallery = '<?php echo $gallery; ?>';
+
+  $.ajax({
+  url : 'updateGallery.php',
+  type: 'GET',
+  data : { "guid" : gameID, "gallery" : gameGallery },
+  success: function()
+  {
+      //if success then just output the text to the status div then clear the form inputs to prepare for new data
   },
   error: function (jqXHR, status, errorThrown)
   {
