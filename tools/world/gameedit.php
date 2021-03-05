@@ -67,7 +67,10 @@ if (!empty($_GET['id'])) {
           itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
           galleryDisplayMode: 'pagination',
           galleryMaxRows: 3,
-          
+          viewerTools:    {
+        topLeft:    'pageCounter',
+        topRight:   'linkOriginalButton, zoomButton, fullscreenButton, closeButton'
+      },
           // ### gallery content ### 
           items: [
             <?php
@@ -85,7 +88,7 @@ if (!empty($_GET['id'])) {
     function addimg(){
    
    $('#nanogallery2').removeClass('nonav');
-  // $('#nanogallery2').nanoGallery2('refreshSize');
+   $('#nanogallery2').nanogallery2('refresh');
  
  }
 </script>
