@@ -127,7 +127,7 @@
           thumbnailWidth:   320,
           itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
           galleryDisplayMode: 'pagination',
-          galleryMaxRows: 3,
+          galleryMaxRows: 6,
           
           // ### gallery content ### 
           items: [
