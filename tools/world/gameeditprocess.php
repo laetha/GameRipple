@@ -14,16 +14,11 @@ $id=$_POST['id'];
 $guid=$_POST['guid'];
 $gallerytemp=$_POST['gallery'];
 $playlisttemp=$_POST['playlist'];
-$reviewbox=$_POST['reviewBox'];
+$reviewtemp=$_POST['review'];
 $gallery=htmlentities(trim(addslashes($gallerytemp)));
 $playlist=htmlentities(trim(addslashes($playlisttemp)));
-if ($reviewbox === 'yes'){
-    $reviewtemp=$_POST['review'];
-    $review=htmlentities(trim(addslashes($reviewtemp)));
-}
-else {
-    $review = '';
-}
+$review=htmlentities(trim(addslashes($reviewtemp)));
+
 $sql = "UPDATE games
 SET gallery = '$gallery', playlist = '$playlist', review = '$review'
 WHERE guid LIKE '$guid';";

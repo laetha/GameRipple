@@ -45,7 +45,7 @@
     <div class="pagetitle" id="pgtitle"></div>
     <div class="nonav" id="gameImage"></div>
     <div class="sidebartext col-md-8">
-      <span id="test"></span>
+      <span id="gamedeck"></span>
       <p>
   <?php }
   else {
@@ -65,11 +65,27 @@
   ?>
      <div class="pagetitle" id="pgtitle"></div>
      <div class="sidebartext col-md-8">
-       <span id="test"></span>
+       <span id="gamedeck"></span>
        <p>
-       
+       <?php if ($gallery == '' && $review == '' && $playlist == ''){
+
+       }
+       else {
+       echo ('<ul class="nav nav-tabs">');
+       if (isset($playlist) && $playlist !== ''){
+       echo ('<li><a data-toggle="tab" href="#videotab">Video</a></li>');
+       }
+       if (isset($gallery) && $gallery !== ''){
+        echo ('<li><a data-toggle="tab" href="#gallerytab" onclick="showGallery()">Gallery</a></li>');
+        }
+        if (isset($review) && $review !== ''){
+          echo ('<li><a data-toggle="tab" href="#reviewtab">Review</a></li>');
+          }
+       echo ('</ul>');
+       }
+       ?>
        <div class="tab-content">
-       <div id="videotab">
+       <div class="tab-pane fade" id="videotab">
          <?php
           if (isset($playlist) && $playlist !== ''){
             $PL1 = 'https://www.youtube.com/embed/videoseries?list=';
@@ -83,10 +99,10 @@
        <?php
        if (isset($gallery) && $gallery !== ''){
        
-            echo ('<div id="gallerytab">');
+            echo ('<div class="tab-pane fade" id="gallerytab">');
           }
           else {
-            echo ('<div class="nonav" id="gallerytab">');
+            echo ('<div class="tab-pane fade" id="gallerytab">');
           }
           ?>
        
@@ -121,10 +137,10 @@
        <?php
        if (isset($review) && $review !== ''){
 
-            echo ('<p><div style="text-align:left;" id="reviewtab">'.$Parsedown->text($review));
+            echo ('<p><div class="tab-pane fade" style="text-align:left;" id="reviewtab">'.$Parsedown->text($review));
           }
           else {
-            echo ('<div class="nonav" id="reviewtab">');
+            echo ('<div class="tab-pane fade" id="reviewtab">');
           }
           ?>
        </div>
@@ -133,7 +149,7 @@
      </div>
 
      <div class="sidebartext col-md-4" style="text-align:right;">
-     <span style="width:100%;" id="test2"></span>
+     <span style="width:100%;" id="gameposter"></span>
      <table align="right">
        <tr>
          <td class="buttoncell">
@@ -192,6 +208,10 @@
 
      
 <script>
+function showGallery(){
+  $('#nanogallery2').nanogallery2('refresh');
+}
+
 var gameInfo;
 var gamePoster;
     /* aaaaa
@@ -243,8 +263,8 @@ function sendRequest(resource, data, callbacks) {
                       gameDeck = res.results.deck;
                       gameImage = res.results.image.medium_url;
                         $('#pgtitle').html(gameTitle);
-                        $('#test').html(gameDeck);
-                        $('#test2').html('<img src=' + gameImage + ' height="300px" />');
+                        $('#gamedeck').html(gameDeck);
+                        $('#gameposter').html('<img src=' + gameImage + ' height="300px" />');
                         $('#gameImage').html(gameImage);
 
                     }

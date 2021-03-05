@@ -102,7 +102,7 @@ if (!empty($_GET['id'])) {
              ?>
              </textarea></div></div>
         
-             <div class="sidebartext col-centered"><input type="checkbox" name="reviewBox" id="reviewBox" value="yes" onclick="showReview()">Review?</div>
+             <!-- <div class="sidebartext col-centered"><input type="checkbox" name="reviewBox" id="reviewBox" value="yes" onclick="showReview()">Review?</div> -->
        </div>
         </div>
 
@@ -111,25 +111,13 @@ if (!empty($_GET['id'])) {
        ?>
        <div class="col-centered">
        <input class="btn btn-primary col-centered inline" type="submit" value="Save">
-       <a class="clean" href="world.php?id=<?php echo $id; ?>"><button class="btn btn-danger col-centered inline" type="button">Cancel</button></a>
+       <a class="clean" href="/tools/world/apitest.php?id=<?php echo $id; ?>"><button class="btn btn-danger col-centered inline" type="button">Cancel</button></a>
        </div>
       </form>
-      <?php
-        echo ('<div class="sidebartext col-md-8 col-md-offset-2" id="reviewPreview">');
-        echo ('<div id="reviewShow"></div>');
-        echo ('</div>');
-        ?>
 
      </div>
    </div>
   </div>
-
-  <script type="text/javascript">
-  function showReview(){
-    var reviewText = $('#review').val();
-    $('#reviewShow').html(marked(reviewText));
-  }
-  </script>
 
 <style>
 .editor-toolbar{
