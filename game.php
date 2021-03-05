@@ -79,7 +79,7 @@
         echo ('<li><a data-toggle="tab" href="#gallerytab" onclick="showGallery()">Gallery</a></li>');
         }
         if (isset($review) && $review !== ''){
-          echo ('<li><a data-toggle="tab" href="#reviewtab">Review</a></li>');
+          echo ('<li><a data-toggle="tab" href="#reviewtab" onclick="showreview()">Review</a></li>');
           }
        echo ('</ul>');
        }
@@ -271,11 +271,6 @@ function sendRequest(resource, data, callbacks) {
                 });
 }
 $(document).ready(function(){
-  var currentReview = $('#reviewtab').html();
-
-    var newReview  = currentReview.replace(/<em>/g, '<div class="caption"><em>');
-    newReview  = newReview.replace(/<\/em>/g, '<\/div><\/em>');
-    $('#reviewtab').html(newReview);
 
  // get game id from somewhere like a link.
  var gameID = '<?php echo $id; ?>';
@@ -301,6 +296,14 @@ $(document).ready(function(){
     //$("em").addClass("caption");
 
 });
+
+function showReview(){
+  var currentReview = $('#reviewtab').html();
+
+var newReview  = currentReview.replace(/<em>/g, '<div class="caption"><em>');
+newReview  = newReview.replace(/<\/em>/g, '<\/div><\/em>');
+$('#reviewtab').html(newReview);
+}
 
 function addGame(){
 
