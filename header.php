@@ -165,7 +165,7 @@ else {
     },
 	onChange: function(value){
 					
-					window.location.href = '/tools/world/apitest.php?id=' + value;
+					window.location.href = '/game.php?id=' + value;
 	}
 	
 

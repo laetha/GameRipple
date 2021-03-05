@@ -74,7 +74,7 @@
                $review = $row['review'];
                $playlist = $row['playlist'];
                $guid = $row['guid'];
-               echo ('<td><a href="/tools/world/apitest.php?id='.$guid.'"><img src="'.$imgurl.'" height="200px" /><br>'.$title.'</a></td>');
+               echo ('<td><a href="/game.php?id='.$guid.'"><img src="'.$imgurl.'" height="200px" /><br>'.$title.'</a></td>');
                echo "<td>".$status."</td>";
                echo "<td>".$rating."</td>";
                if ($gallery !== ''){

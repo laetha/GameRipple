@@ -1,1 +1,0 @@
-[20-Sep-2018 00:21:46 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/gameripp/public_html/tools/srd/index.php on line 19
