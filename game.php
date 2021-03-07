@@ -89,7 +89,7 @@
         echo ('<li><a data-toggle="tab" href="#gallerytab" onclick="showGallery()">Gallery</a></li>');
         }
         if (isset($review) && $review !== ''){
-          echo ('<li><a data-toggle="tab" href="#reviewtab" onclick="showreview()">Review</a></li>');
+          echo ('<li><a data-toggle="tab" href="#reviewtab" onclick="showReview()">Review</a></li>');
           }
        echo ('</ul>');
        }

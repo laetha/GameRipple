@@ -14,10 +14,10 @@ $id=$_POST['id'];
 $guid=$_POST['guid'];
 $gallerytemp=$_POST['gallery'];
 $playlisttemp=$_POST['playlist'];
-$reviewtemp=$_POST['review'];
+$review=trim(addslashes($_POST['review']));
 $gallery=htmlentities(trim(addslashes($gallerytemp)));
 $playlist=htmlentities(trim(addslashes($playlisttemp)));
-$review=htmlentities(trim(addslashes($reviewtemp)));
+//$review=htmlentities(trim(addslashes($reviewtemp)));
 
 $sql = "UPDATE games
 SET gallery = '$gallery', playlist = '$playlist', review = '$review'
