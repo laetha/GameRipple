@@ -57,39 +57,29 @@ if (!empty($_GET['id'])) {
              <div class="text">Playlist URL</div><input class="textbox" style="text-align:center;" type="text" name="playlist" id="playlist" value="<?php echo $playlist; ?>">
              </div>
              <dic class="col-sm-10 col-centered typebox">
-             <div class="nonav" id="nanogallery2"></div>
-             <script>
-   jQuery(document).ready(function () {
-        jQuery("#nanogallery2").nanogallery2( {
-          // ### gallery settings ### 
-          thumbnailHeight:  180,
-          thumbnailWidth:   320,
-          itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
-          galleryDisplayMode: 'pagination',
-          galleryMaxRows: 3,
-          viewerTools:    {
-        topLeft:    'pageCounter',
-        topRight:   'linkOriginalButton, zoomButton, fullscreenButton, closeButton'
-      },
-          // ### gallery content ### 
-          items: [
+             <div class="nonav" id="imgGrid">
+   
             <?php
               foreach ($files as $img){
                 if (strpos($img,'.png') !== false || strpos($img,'.png') !== false || strpos($img,'.png') !== false){
-                echo ("{ src: '".$img."' },");
+                echo ('<a onclick="insertImg()"><img src="/gallery/'.$gallery.'/'.$img.'" width="200px" /></a>');
                 }
               }
 
             ?>
-            ]
-        });
-    });
+            </div>
+<script>
+function insertImg(){
+      //var reviewText = $('#review').val();
+      //var newImg = reviewText.replace("![](http://)", "Hello");
+      //var newImg = 'hello';
+      $('#review').val('value');
+    }
 
     function addimg(){
-   
-   $('#nanogallery2').removeClass('nonav');
-   $('#nanogallery2').nanogallery2('refresh');
- 
+   $('#imgGrid').removeClass('nonav');
+   //$('#nanogallery2').nanogallery2('refresh');
+  
  }
 </script>
              <div class="text col-centered col-md-12">Review<textarea type="text" name="review" id="review"><?php 
@@ -129,6 +119,7 @@ if (!empty($_GET['id'])) {
 var simplemde = new SimpleMDE({ element: document.getElementById("review") });
 
 $(document).ready(function(){
+  
 
   $(".fa-question-circle").after('<i class="separator">|</i><a title="Image from Gallery" tabindex="-1" class="fa fa-picture-o" onclick="addimg()"></a>');
   
