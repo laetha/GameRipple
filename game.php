@@ -82,15 +82,16 @@
        }
        else {
        echo ('<ul class="nav nav-tabs">');
+       if (isset($review) && $review !== ''){
+        echo ('<li><a data-toggle="tab" href="#reviewtab" onclick="showReview()">Review</a></li>');
+        }
        if (isset($playlist) && $playlist !== ''){
        echo ('<li><a data-toggle="tab" href="#videotab">Video</a></li>');
        }
        if (isset($files)){
         echo ('<li><a data-toggle="tab" href="#gallerytab" onclick="showGallery()">Gallery</a></li>');
         }
-        if (isset($review) && $review !== ''){
-          echo ('<li><a data-toggle="tab" href="#reviewtab" onclick="showReview()">Review</a></li>');
-          }
+        
        echo ('</ul>');
        }
        ?>

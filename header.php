@@ -46,7 +46,7 @@ else {
 		<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-		<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+		<script src="/plugins/simplemde-markdown-editor/dist/simplemde.min.js"></script>
 		<link  href="/plugins/nanogallery2/src/css/nanogallery2.css" rel="stylesheet" type="text/css">
             <script  type="text/javascript" src="/plugins/nanogallery2/dist/jquery.nanogallery2.min.js"></script>
 
