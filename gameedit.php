@@ -49,6 +49,7 @@ if (!empty($_GET['id'])) {
 ?>
 
         <div class="col-md-10 col-centered">
+        <div id="test" class="sidebartext">AAAAAAAAA</div>
          <div class="col-sm-6 typebox col-centered" id="name">
              <form method="post" action="gameeditprocess.php" id="import" enctype="multipart/form-data">
              <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
@@ -131,7 +132,12 @@ var simplemde = new SimpleMDE({ element: document.getElementById("review") });
 $(document).ready(function(){
 
   $(".fa-question-circle").after('<i class="separator">|</i><a title="Image from Gallery" tabindex="-1" class="fa fa-picture-o" onclick="addimg()"></a>');
-  
+
+  //var imgurl; 
+		$('.nGY2GThumbnailIconsFullThumbnail').click(function(){
+		//	imgurl = $(this).attr('src');
+			$('#test').html('imgurl');
+		});
 });
 
 </script>
