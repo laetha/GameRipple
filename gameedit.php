@@ -49,7 +49,6 @@ if (!empty($_GET['id'])) {
 ?>
 
         <div class="col-md-10 col-centered">
-        <div id="test" class="sidebartext">AAAAAAAAA</div>
          <div class="col-sm-6 typebox col-centered" id="name">
              <form method="post" action="gameeditprocess.php" id="import" enctype="multipart/form-data">
              <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
