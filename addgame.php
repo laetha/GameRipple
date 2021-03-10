@@ -3,7 +3,8 @@
 $sqlpath .= "/sql-connect.php";
 include_once($sqlpath);
 
-$title =$_REQUEST['title'];
+$titletemp =$_REQUEST['title'];
+$title=htmlentities(trim(addslashes($titletemp)));
 $guid = $_REQUEST['guid'];
 $imgurl = $_REQUEST['gameImage'];
 $gallery = $_REQUEST['gallery'];
