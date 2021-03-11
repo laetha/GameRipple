@@ -90,6 +90,7 @@ else {
 					
 					</select>
 				</li>
+				<li><a href="games.php">Games</a></li>
 				
 						<?php
 			if ($loguser == 'tarfuin'){

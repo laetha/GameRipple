@@ -203,6 +203,7 @@
   </button>
   <ul class="dropdown-menu">
     <li class="dropbutton" id="Unplayed" onClick="statusChange('Unplayed')">Unplayed</li>
+    <li class="dropbutton" id="Unplayed" onClick="statusChange('Playing')">Playing</li>
     <li class="dropbutton" id="Played" onClick="statusChange('Played')">Played</li>
     <li class="dropbutton" id="Finished" onClick="statusChange('Finished')">Finished</li>
   </div>
@@ -390,11 +391,17 @@ function updateGallery(){
 function statusChange(value){
   var gameID = '<?php echo $id; ?>';
   var gameStatus = value;
+  var currentDate = Date.now();
+           /* var date = ("0" + currentDate.getDate()).slice(-2);
+            var month = ("0" + currentDate.getMonth()).slice(-2);
+            month = parseInt(month) + 1;
+            var year = currentDate.getFullYear();
+            var dateString = year + '' + (month) + '' + date;*/
 
   $.ajax({
   url : 'changestatus.php',
   type: 'GET',
-  data : { "guid" : gameID, "status" : gameStatus },
+  data : { "guid" : gameID, "status" : gameStatus, "fin_date" : currentDate },
   success: function()
   {
       //if success then just output the text to the status div then clear the form inputs to prepare for new data

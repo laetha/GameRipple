@@ -5,7 +5,7 @@
    include_once($sqlpath);
 
    //Header
-   $pgtitle = 'NPCs - ';
+   $pgtitle = '';
    $headpath = $_SERVER['DOCUMENT_ROOT'];
    $headpath .= "/header.php";
    include_once($headpath);
@@ -23,111 +23,43 @@
 
      <!-- Page Header -->
      <div class="col-md-12">
-     <div class="pagetitle" id="pgtitle">My Games</div>
+     <div class="pagetitle" id="pgtitle">Gameripple</div>
    </div>
      <div class="body sidebartext col-xs-12" id="body">
-       <div class="table-responsive">
-   <table id="library" class="table table-condensed table-striped table-responsive dt-responsive" cellspacing="0" width="100%">
-           <thead class="thead-dark">
-               <tr>
-                   <th scope="col">Title</th>
+     <div class="col-md-4">Currently Playing<p>
+     <?php
+     $usercheck = "SELECT * FROM games WHERE status LIKE 'Playing'";
+		 $userdata = mysqli_query($dbcon, $usercheck) or die('error getting data');
+		 while($row =  mysqli_fetch_array($userdata, MYSQLI_ASSOC)) {
+      echo ('<a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
+      echo ('<p>'.$row['title'].'</a>');
+     }
+     ?>
+     </div>
+     
+     <div class="col-md-4">Last Finished<p>
+     <?php
+     $usercheck = "SELECT * FROM games ORDER BY fin_date DESC LIMIT 1";
+		 $userdata = mysqli_query($dbcon, $usercheck) or die('error getting data');
+		 while($row =  mysqli_fetch_array($userdata, MYSQLI_ASSOC)) {
+      echo ('<a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
+      echo ('<p>'.$row['title'].'</a>');
+     }
+     ?>
+     </div>
+     <div class="col-md-4">Random Game<p>
+     <?php
+     $usercheck = "SELECT * FROM games ORDER BY RAND() LIMIT 1";
+		 $userdata = mysqli_query($dbcon, $usercheck) or die('error getting data');
+		 while($row =  mysqli_fetch_array($userdata, MYSQLI_ASSOC)) {
+      echo ('<a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
+      echo ('<p>'.$row['title'].'</a>');
 
-                   <th scope="col">Status</th>
+     }
+     ?>
+     </div>
 
-                   <th scope="col">Rating</th>
 
-                   <th scope="col">Gallery</th>
-
-                   <th scope="col">Playlist</th>
-
-                   <th scope="col">Review</th>
-
-               </tr>
-           </thead>
-           <tfoot>
-             <tr>
-             <th scope="col">Title</th>
-
-              <th scope="col">Status</th>
-
-              <th scope="col">Rating</th>
-
-              <th scope="col">Gallery</th>
-
-              <th scope="col">Playlist</th>
-
-              <th scope="col">Review</th>
-
-             </tr>
-           </tfoot>
-           <tbody>
-             <?php
-               $sqlcompendium = "SELECT * FROM games WHERE active=1";
-               $compendiumdata = mysqli_query($dbcon, $sqlcompendium) or die('error getting data');
-               while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
-               //echo ('<tr><td>');
-               $title = $row['title'];
-               $imgurl = $row['imgurl'];
-               $status = $row['status'];
-               $rating = $row['rating'];
-               $gallery = $row['gallery'];
-               $review = $row['review'];
-               $playlist = $row['playlist'];
-               $guid = $row['guid'];
-               echo ('<td><a href="/game.php?id='.$guid.'"><img src="'.$imgurl.'" height="200px" /><br>'.$title.'</a></td>');
-               echo "<td>".$status."</td>";
-               echo "<td>".$rating."</td>";
-               if ($gallery !== ''){
-                echo ('<td><img src="/assets/checkmark.png" width="22px" height="22px" /></td>');
-               }
-               else {
-                echo ('<td><img src="/assets/checkmark-x.png" width="20px" height="20px" /></td>');
-               }
-               if ($playlist !== ''){
-                echo ('<td><img src="/assets/checkmark.png" width="22px" height="22px" /></td>');
-               }
-               else {
-                echo ('<td><img src="/assets/checkmark-x.png" width="20px" height="20px" /></td>');
-               }
-               if ($review !== ''){
-                echo ('<td><img src="/assets/checkmark.png" width="22px" height="22px" /></td>');
-               }
-               else {
-                echo ('<td><img src="/assets/checkmark-x.png" width="20px" height="20px" /></td>');
-               }
-               
-               echo "</tr>";
-
-             }
-               ?>
-
-</tbody>
-</table>
-<script>
-$(document).ready(function() {
-    // Setup - add a text input to each footer cell
-    /*$('#library tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
-    } );*/
-
-    // DataTable
-    var table = $('#library').DataTable();
-
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
-
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
-} );
-</script>
 </div>
 </div>
 </div>

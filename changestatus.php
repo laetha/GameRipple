@@ -5,9 +5,15 @@ include_once($sqlpath);
 
 $guid = $_REQUEST['guid'];
 $status = $_REQUEST['status'];
+if ($status == 'Finished'){
+  $findate = $_REQUEST['fin_date'];
+}
+else {
+  $findate = 0;
+}
 
 
-$sql = "UPDATE games SET status='$status' WHERE guid LIKE '$guid'";
+$sql = "UPDATE games SET status='$status', fin_date='$findate' WHERE guid LIKE '$guid'";
 
         if ($dbcon->query($sql) === TRUE) {
 					
