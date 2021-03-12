@@ -325,7 +325,7 @@ function addGame(){
   var gameID = '<?php echo $id; ?>';
   var gameTitle = $('#pgtitle').html();
   var gameImage = $('#gameImage').html(); 
-  var gameGallery = '<?php echo $galleryclean; ?>';
+  var gameGallery = "<?php echo $gallery; ?>";
 
   $.ajax({
     url : 'addgame.php',
@@ -371,7 +371,7 @@ $.ajax({
 
 function updateGallery(){
   var gameID = '<?php echo $id; ?>';
-  var gameGallery = '<?php echo $galleryclean; ?>';
+  var gameGallery = "<?php echo $gallery; ?>";
 
   $.ajax({
   url : 'updateGallery.php',

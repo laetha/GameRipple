@@ -5,7 +5,7 @@ include_once($sqlpath);
 
 $guid = $_REQUEST['guid'];
 $gallery = $_REQUEST['gallery'];
-
+$gallery = addslashes($gallery);
 
 
 $sql = "UPDATE games SET gallery='$gallery' WHERE guid LIKE '$guid'";
