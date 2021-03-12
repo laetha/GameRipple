@@ -40,6 +40,7 @@ if (!empty($_GET['id'])) {
          $editid = $editrow['id'];
          $guid = $editrow['guid'];
          $gallery = $editrow['gallery'];
+         $galleryclean = addslashes($gallery);
          $playlist = $editrow['playlist'];
          $review = $editrow['review'];
 
@@ -64,7 +65,7 @@ if (!empty($_GET['id'])) {
           // ### gallery settings ### 
           thumbnailHeight:  180,
           thumbnailWidth:   320,
-          itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
+          itemsBaseURL:     '/gallery/' + '<?php echo $galleryclean; ?>/',
           galleryDisplayMode: 'pagination',
           galleryMaxRows: 5,
           viewerTools:    {

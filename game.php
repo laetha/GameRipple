@@ -53,6 +53,7 @@
     $title = $row['title'];
     $rating = $row['rating'];
     $gallery = $row['gallery'];
+    $galleryclean = addslashes($gallery);
     $playlist = $row['playlist'];
     $review = $row['review'];
 
@@ -126,7 +127,7 @@
           // ### gallery settings ### 
           thumbnailHeight:  180,
           thumbnailWidth:   320,
-          itemsBaseURL:     '/gallery/' + '<?php echo $gallery; ?>/',
+          itemsBaseURL:     '/gallery/' + '<?php echo $galleryclean; ?>/',
           galleryDisplayMode: 'pagination',
           galleryMaxRows: 6,
           
@@ -324,7 +325,7 @@ function addGame(){
   var gameID = '<?php echo $id; ?>';
   var gameTitle = $('#pgtitle').html();
   var gameImage = $('#gameImage').html(); 
-  var gameGallery = '<?php echo $gallery; ?>';
+  var gameGallery = '<?php echo $galleryclean; ?>';
 
   $.ajax({
     url : 'addgame.php',
@@ -370,7 +371,7 @@ $.ajax({
 
 function updateGallery(){
   var gameID = '<?php echo $id; ?>';
-  var gameGallery = '<?php echo $gallery; ?>';
+  var gameGallery = '<?php echo $galleryclean; ?>';
 
   $.ajax({
   url : 'updateGallery.php',
