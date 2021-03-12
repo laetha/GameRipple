@@ -5,13 +5,14 @@ include_once($sqlpath);
 
 $guid = $_REQUEST['guid'];
 $status = $_REQUEST['status'];
+
 if ($status == 'Finished'){
-  $findate = $_REQUEST['fin_date'];
+  $findate = time();
 }
 else {
   $findate = 0;
 }
-
+//$findate = 1;
 
 $sql = "UPDATE games SET status='$status', fin_date='$findate' WHERE guid LIKE '$guid'";
 
