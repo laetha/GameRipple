@@ -135,6 +135,7 @@
           items: [
             <?php
               foreach ($files as $img){
+                $img = addslashes($img);
                 if (strpos($img,'.png') !== false || strpos($img,'.jpg') !== false || strpos($img,'.jpeg') !== false){
                 echo ("{ src: '".$img."' },");
                 }
