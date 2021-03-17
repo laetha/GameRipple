@@ -24,6 +24,8 @@
      <!-- Page Header -->
      <div class="col-md-12">
      <div class="pagetitle" id="pgtitle">My Games</div>
+     <button class="btn btn-primary" id="compact" onclick="compact('compact')">Compact</button>
+     <button class="btn btn-primary nonav" id="expanded" onclick="compact('expanded')">Expanded</button>
    </div>
      <div class="body sidebartext col-xs-12" id="body">
        <div class="table-responsive">
@@ -103,6 +105,26 @@
 
 </tbody>
 </table>
+<script>
+
+function compact(value){
+  if (value == 'compact'){
+    $('img').addClass('nonav');
+    $('br').addClass('nonav');
+    $('#compact').addClass('nonav');
+    $('#expanded').removeClass('nonav');
+  }
+  if (value == 'expanded'){
+    $('img').removeClass('nonav');
+    $('br').removeClass('nonav');
+    $('#compact').removeClass('nonav');
+    $('#expanded').addClass('nonav');
+  }
+}
+
+</script>
+
+
 <script>
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
