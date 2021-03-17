@@ -78,22 +78,22 @@
                echo "<td>".$status."</td>";
                echo "<td>".$rating."</td>";
                if ($gallery !== ''){
-                echo ('<td><img src="/assets/checkmark.png" width="22px" height="22px" /></td>');
+                echo ('<td class="green">Yes</td>');
                }
                else {
-                echo ('<td><img src="/assets/checkmark-x.png" width="20px" height="20px" /></td>');
+                echo ('<td class="red">No</td>');
                }
                if ($playlist !== ''){
-                echo ('<td><img src="/assets/checkmark.png" width="22px" height="22px" /></td>');
+                echo ('<td class="green">Yes</td>');
                }
                else {
-                echo ('<td><img src="/assets/checkmark-x.png" width="20px" height="20px" /></td>');
+                echo ('<td class="red">No</td>');
                }
                if ($review !== ''){
-                echo ('<td><img src="/assets/checkmark.png" width="22px" height="22px" /></td>');
+                echo ('<td class="green">Yes</td>');
                }
                else {
-                echo ('<td><img src="/assets/checkmark-x.png" width="20px" height="20px" /></td>');
+                echo ('<td class="red">No</td>');
                }
                
                echo "</tr>";
@@ -106,10 +106,10 @@
 <script>
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    /*$('#library tfoot th').each( function () {
+    $('#library tfoot th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input type="text" class="form-control" placeholder="Search '+title+'" />' );
-    } );*/
+        $(this).html( '<input type="text" class="form-control" style="max-width:80px;" placeholder="'+title+'" />' );
+    } );
 
     // DataTable
     var table = $('#library').DataTable();

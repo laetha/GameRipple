@@ -1259,3 +1259,10 @@ code {
 	  font-size:14px;
   }
   
+  .green {
+	  color: rgb(115, 230, 115);
+  }
+
+  .red {
+	  color: rgb(240, 73, 73);
+  }

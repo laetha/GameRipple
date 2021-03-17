@@ -51,6 +51,7 @@
   else {
   while($row = mysqli_fetch_array($compendiumdata, MYSQLI_ASSOC)) {
     $title = $row['title'];
+    $titleclean = str_replace(":", "", $title);
     $rating = $row['rating'];
     $gallery = $row['gallery'];
     $galleryclean = addslashes($gallery);
@@ -65,10 +66,10 @@
         $files = scandir($path);
   }
   else {
-    if (is_dir($_SERVER['DOCUMENT_ROOT'].'/gallery/'.$title) == true){
-      $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$title.'/';
+    if (is_dir($_SERVER['DOCUMENT_ROOT'].'/gallery/'.$titleclean) == true){
+      $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$titleclean.'/';
         $files = scandir($path);
-        $gallery = $title;
+        $gallery = $titleclean;
     }
     
   }        
@@ -373,6 +374,7 @@ $.ajax({
 function updateGallery(){
   var gameID = '<?php echo $id; ?>';
   var gameGallery = "<?php echo $gallery; ?>";
+  //gameGallery = gameGallery.replace(":","");
 
   $.ajax({
   url : 'updateGallery.php',
