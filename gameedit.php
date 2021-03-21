@@ -68,6 +68,7 @@ if (!empty($_GET['id'])) {
           itemsBaseURL:     '/gallery/' + '<?php echo $galleryclean; ?>/',
           galleryDisplayMode: 'pagination',
           galleryMaxRows: 5,
+          viewerZoom:false,
           viewerTools:    {
         topLeft:    'pageCounter',
         topRight:   'linkOriginalButton, zoomButton, fullscreenButton, closeButton'

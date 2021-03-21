@@ -131,6 +131,7 @@
           itemsBaseURL:     '/gallery/' + '<?php echo $galleryclean; ?>/',
           galleryDisplayMode: 'pagination',
           galleryMaxRows: 6,
+          viewerZoom: false,
           
           // ### gallery content ### 
           items: [
