@@ -65,7 +65,7 @@ if (!empty($_GET['id'])) {
           // ### gallery settings ### 
           thumbnailHeight:  180,
           thumbnailWidth:   320,
-          itemsBaseURL:     '/gallery/' + '<?php echo $galleryclean; ?>/',
+          itemsBaseURL:     '/gallery/Thumbnails/' + '<?php echo $galleryclean; ?>/',
           galleryDisplayMode: 'pagination',
           galleryMaxRows: 5,
           viewerZoom:false,
