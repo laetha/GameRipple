@@ -45,7 +45,7 @@ if (!empty($_GET['id'])) {
          $review = $editrow['review'];
 
           
-        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
+        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/Thumbnails/'.$gallery.'/';
         $files = scandir($path);
 ?>
 

@@ -62,12 +62,12 @@
   }
   if (isset($gallery) && $gallery !== ''){
 
-        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$gallery.'/';
+        $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/Thumbnails/'.$gallery.'/';
         $files = scandir($path);
   }
   else {
-    if (is_dir($_SERVER['DOCUMENT_ROOT'].'/gallery/'.$titleclean) == true){
-      $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/'.$titleclean.'/';
+    if (is_dir($_SERVER['DOCUMENT_ROOT'].'/gallery/Thumbnails/'.$titleclean) == true){
+      $path = $_SERVER['DOCUMENT_ROOT'].'/gallery/Thumbnails/'.$titleclean.'/';
         $files = scandir($path);
         $gallery = $titleclean;
     }
