@@ -26,34 +26,34 @@
      <div class="pagetitle" id="pgtitle">Gameripple</div>
    </div>
      <div class="body sidebartext col-xs-12" id="body">
-     <div class="col-md-4">Currently Playing<p>
+     <div class="col-sm-4 col-xs-12">Currently Playing<p>
      <?php
      $usercheck = "SELECT * FROM games WHERE status LIKE 'Playing'";
 		 $userdata = mysqli_query($dbcon, $usercheck) or die('error getting data');
 		 while($row =  mysqli_fetch_array($userdata, MYSQLI_ASSOC)) {
-      echo ('<a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
-      echo ('<p>'.$row['title'].'</a>');
+      echo ('<div class="col-xs-6"><a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" style="max-width:100%; max-height:300px;" />');
+      echo ('<p>'.$row['title'].'</a></div>');
      }
      ?>
      </div>
      
-     <div class="col-md-4">Last Finished<p>
+     <div class="col-sm-4 col-xs-12">
      <?php
      $usercheck = "SELECT * FROM games ORDER BY fin_date DESC LIMIT 1";
 		 $userdata = mysqli_query($dbcon, $usercheck) or die('error getting data');
 		 while($row =  mysqli_fetch_array($userdata, MYSQLI_ASSOC)) {
-      echo ('<a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
-      echo ('<p>'.$row['title'].'</a>');
+      echo ('<div>Last Finished<p><a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
+      echo ('<p>'.$row['title'].'</a></div>');
      }
      ?>
      </div>
-     <div class="col-md-4">Random Game<p>
+     <div class="col-xs-4 col-xs-12">
      <?php
      $usercheck = "SELECT * FROM games ORDER BY RAND() LIMIT 1";
 		 $userdata = mysqli_query($dbcon, $usercheck) or die('error getting data');
 		 while($row =  mysqli_fetch_array($userdata, MYSQLI_ASSOC)) {
-      echo ('<a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
-      echo ('<p>'.$row['title'].'</a>');
+      echo ('<div>Random Game<p><a href="game.php?id='.$row['guid'].'"><img src="'.$row['imgurl'].'" height="300px" />');
+      echo ('<p>'.$row['title'].'</a></div>');
 
      }
      ?>
